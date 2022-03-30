@@ -45,11 +45,11 @@ public class IFace_create_account{
     }
 
     //CREATE A COMMUNITY
-    public static void addCommunity() {
+    public void addCommunity() {
 
         String[] community_name;
         String[] community_description;
-        int count = 0;
+        int count = 3;
 
         community_name = new String[30];
         community_description = new String[300];
@@ -103,6 +103,9 @@ public class IFace_create_account{
                     this.name[count] = newedit.nextLine();
                 }
                 newedit.close();
+            }
+            else if(new_count == this.count){
+                System.out.println("User not found or user and password don't match!");
             }
             else{
                 new_count++;
