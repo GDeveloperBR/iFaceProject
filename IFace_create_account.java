@@ -4,11 +4,12 @@ import java.util.Scanner;
 // 1 - Criação de conta
 // 2 - Criação de comunidade
 // 3 - Criação/Edição de Perfil
-// 4 - 
+// 4 - Envio de mensagens
 public class IFace_create_account{
     String[] name;
     String[] login;
     String[] pass;
+    String[] community_name;
     int count = 0;
 
     public IFace_create_account () {
@@ -47,17 +48,16 @@ public class IFace_create_account{
     //CREATE A COMMUNITY
     public void addCommunity() {
 
-        String[] community_name;
         String[] community_description;
         int count = 3;
-
-        community_name = new String[30];
+        this.community_name = new String[30];
+        
         community_description = new String[300];
 
         //User put the community name
         Scanner new_community_name = new Scanner(System.in);
         System.out.println("Enter the community name: ");
-        community_name[count] = new_community_name.nextLine();
+        this.community_name[count] = new_community_name.nextLine();
 
         //User put the community description
         Scanner new_description = new Scanner(System.in);
@@ -114,5 +114,55 @@ public class IFace_create_account{
         edit.close();
         edtuser.close();
         edtuser2.close();
+    }
+    //ENVIO DE MENSAGENS
+    public void sendMessage() {
+        
+        Scanner input = new Scanner(System.in);
+        System.out.println("Do you want to send a message to a community or people?\nPress 1 to community\nPress 2 to users");
+        int messagestyle = input.nextInt(), other_count = 0;
+
+
+        if(messagestyle == 1)
+        {
+            Scanner inn = new Scanner(System.in);
+            System.out.println("What is the community name?");
+            String thename = inn.nextLine();
+
+            while(other_count < this.count){
+                if(this.community_name[other_count] == thename){
+                    
+                    System.out.println("Type the message: ");
+                    String themessage = inn.nextLine();
+                    System.out.printf("A sua mensagem foi publicada! Confira: %s", themessage);
+                }
+                else{
+                    other_count++;
+                }
+            }
+            inn.close();
+        }
+        else if(messagestyle == 2){
+            Scanner inn = new Scanner(System.in);
+            System.out.println("What is the user name?");
+            String thename = inn.nextLine();
+
+            while(other_count < this.count){
+                if(this.name[other_count] == thename){
+                    
+                    System.out.println("Type the message: ");
+                    String themessage = inn.nextLine();
+                    System.out.printf("Você enviou: %s", themessage);
+                }
+                else{
+                    other_count++;
+                }
+            }
+            inn.close();
+        }
+        else{
+            System.out.printf("Invalid option!");
+        }
+        input.close();
     }
 }
